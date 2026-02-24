@@ -1,0 +1,22 @@
+# Build
+build/
+out/
+
+# VSCode
+.vscode/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Compiled
+*.o
+*.a
+*.lib
+*.exe
+*.dll
+
+# vcpkg
+vcpkg_installed/
