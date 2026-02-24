@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Dev/eliott-input/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  -IC:\\Dev\\eliott-input\\include -IC:\\Dev\\vcpkg\\installed\\x64-mingw-static\\include -g -std=gnu++20 -o CMakeFiles\\eliott-input.dir\\src\\InputManager.cpp.obj -c C:\\Dev\\eliott-input\\src\\InputManager.cpp",
+  "file": "C:/Dev/eliott-input/src/InputManager.cpp",
+  "output": "CMakeFiles/eliott-input.dir/src/InputManager.cpp.obj"
+},
+{
+  "directory": "C:/Dev/eliott-input/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  -IC:\\Dev\\eliott-input\\include -isystem C:\\Dev\\vcpkg\\installed\\x64-mingw-static\\include -g -std=gnu++20 -o CMakeFiles\\tests.dir\\tests\\test-input.cpp.obj -c C:\\Dev\\eliott-input\\tests\\test-input.cpp",
+  "file": "C:/Dev/eliott-input/tests/test-input.cpp",
+  "output": "CMakeFiles/tests.dir/tests/test-input.cpp.obj"
+}
+]

@@ -1,0 +1,2 @@
+C:\msys64\mingw64\bin\ar.exe qc libeliott-input.a "CMakeFiles/eliott-input.dir/src/InputManager.cpp.obj"
+C:\msys64\mingw64\bin\ranlib.exe libeliott-input.a
