@@ -1,11 +1,12 @@
 #pragma once
 #include <unordered_map>
 #include <functional>
-#include <SDL3/SDL.h>
+#include "input/Keys.hpp"
+
+struct SDL_Gamepad;
 
 namespace ee::input
 {
-
     struct KeyState
     {
         bool isDown;
@@ -19,14 +20,14 @@ namespace ee::input
     private:
         // manette
         SDL_Gamepad *m_controller = nullptr;
-        std::unordered_map<SDL_GamepadButton, KeyState> m_gamePadButtonsStates;
-        std::unordered_map<SDL_GamepadAxis, float> m_gamePadAxesStates;
+        std::unordered_map<GamepadButton, KeyState> m_gamePadButtonsStates;
+        std::unordered_map<GamepadAxis, float> m_gamePadAxesStates;
 
         // clavier
-        std::unordered_map<SDL_Scancode, KeyState> m_keysStates;
-        std::unordered_map<int, KeyState> m_mouseButtonsStates;
+        std::unordered_map<Key, KeyState> m_keysStates;
+        std::unordered_map<MouseButton, KeyState> m_mouseButtonsStates;
 
-        std::function<void(SDL_GamepadType)> m_onGamepadConnected;
+        std::function<void()> m_onGamepadConnected;
 
         float m_mouseX;
         float m_mouseY;
@@ -34,96 +35,36 @@ namespace ee::input
         InputManager(const InputManager &) = delete;
         InputManager &operator=(const InputManager &) = delete;
 
-        InputManager(){
-            m_mouseX = 0.;
-            m_mouseY = 0.;
-            SDL_Init(SDL_INIT_GAMEPAD);
-
-        }
+        InputManager();
 
     public:
 
-        ~InputManager(){
-            if (m_controller != nullptr)
-                SDL_CloseGamepad(m_controller);
-        }
-
+        ~InputManager();
         static InputManager &getInstance()
         {
             static InputManager instance = InputManager();
             return instance;
         }
 
-        bool IsKeyDown(SDL_Scancode _key) const
-        {
-            if (auto it = m_keysStates.find(_key); it != m_keysStates.end())
-                return it->second.isDown;
-            return false;
-        }
-        bool IsKeyReleased(SDL_Scancode _key) const
-        {
-            if (auto it = m_keysStates.find(_key); it != m_keysStates.end())
-                return it->second.isRelease;
-            return false;
-        }
-        bool IsKeyHeld(SDL_Scancode _key) const
-        {
-            if (auto it = m_keysStates.find(_key); it != m_keysStates.end())
-                return it->second.isHeld;
-            return false;
-        }
+        bool IsKeyDown(Key _key) const;
 
-        bool IsMouseDown(int _key) const
-        {
-            if (auto it = m_mouseButtonsStates.find(_key); it != m_mouseButtonsStates.end())
-                return it->second.isDown;
-            return false;
-        }
-        bool IsMouseReleased(int _key) const
-        {
-            if (auto it = m_mouseButtonsStates.find(_key); it != m_mouseButtonsStates.end())
-                return it->second.isRelease;
-            return false;
-        }
-        bool IsMouseHeld(int _key) const
-        {
+        bool IsKeyReleased(Key _key) const;
+        bool IsKeyHeld(Key _key) const;
 
-            if (auto it = m_mouseButtonsStates.find(_key); it != m_mouseButtonsStates.end())
-                return it->second.isHeld;
-            return false;
-        }
+        bool IsMouseDown(MouseButton _key) const;
+        bool IsMouseReleased(MouseButton _key) const;
+        bool IsMouseHeld(MouseButton _key) const;
 
-        bool IsKeyDown(SDL_GamepadButton _key) const
-        {
-            if (auto it = m_gamePadButtonsStates.find(_key); it != m_gamePadButtonsStates.end())
-                return it->second.isDown;
-            return false;
-        }
-        bool IsKeyReleased(SDL_GamepadButton _key) const
-        {
-            if (auto it = m_gamePadButtonsStates.find(_key); it != m_gamePadButtonsStates.end())
-                return it->second.isRelease;
-            return false;
-        }
-        bool IsKeyHeld(SDL_GamepadButton _key) const
-        {
-            if (auto it = m_gamePadButtonsStates.find(_key); it != m_gamePadButtonsStates.end())
-                return it->second.isHeld;
-            return false;
-        }
+        bool IsKeyDown(GamepadButton _key) const;
+        bool IsKeyReleased(GamepadButton _key) const;
+        bool IsKeyHeld(GamepadButton _key) const;
 
-        float getAxisForce(SDL_GamepadAxis _axis) const {
-
-            if (auto it = m_gamePadAxesStates.find(_axis); it != m_gamePadAxesStates.end()){
-                return it->second;
-            }
-            return 0;
-        }
+        float getAxisForce(GamepadAxis _axis) const;
 
         float getMousePosX() const { return m_mouseX; }
         float getMousePosY() const { return m_mouseY; }
 
-        void setOnGamepadConnected(const std::function<void(SDL_GamepadType)>& _fonc){
+        void setOnGamepadConnected(const std::function<void()>& _fonc){
             m_onGamepadConnected = _fonc;
         }
 

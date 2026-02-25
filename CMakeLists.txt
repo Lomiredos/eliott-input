@@ -35,6 +35,6 @@ target_include_directories(eliott-input PUBLIC
     include/
 )
 
-target_link_libraries(eliott-input PUBLIC
+target_link_libraries(eliott-input PRIVATE
 SDL3::SDL3
 )

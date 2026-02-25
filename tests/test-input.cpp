@@ -12,7 +12,7 @@ TEST_CASE("Teste de l'action map") {
     
     ActionMap<Action> map;
 
-    map.bind(Action::Jump, {{SDL_SCANCODE_SPACE, TriggerState::Down}});
+    map.bind(Action::Jump, {{Key::Space, TriggerState::Down}});
 
     CHECK(map.getSize() == 1);
 
@@ -27,11 +27,11 @@ TEST_CASE("test du singleton InputManager"){
 
     CHECK(im.getMousePosX() == 0);
 
-    CHECK(im.IsKeyDown(SDL_SCANCODE_A) == false);
+    CHECK(im.IsKeyDown(Key::A) == false);
     
     auto& a = InputManager::getInstance();
     auto& b = InputManager::getInstance();
-    CHECK(&a == &b);  // même adresse = même objet
+    CHECK(&a == &b);  
 
 
 

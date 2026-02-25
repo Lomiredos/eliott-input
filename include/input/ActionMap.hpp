@@ -1,7 +1,7 @@
 #pragma once
 
-#include "InputManager.hpp"
-#include "KeyBinding.hpp"
+#include "input/InputManager.hpp"
+#include "input/KeyBinding.hpp"
 
 #include <unordered_map>
 
@@ -47,7 +47,7 @@ namespace ee::input
                 {
                     if (std::visit([this, &key](auto val)
                                    {
-                                       if constexpr (std::is_same_v<decltype(val), SDL_Scancode>){
+                                       if constexpr (std::is_same_v<decltype(val), Key>){
                                            switch (key.second)
                                            {
                                            case (TriggerState::Down):
@@ -60,7 +60,7 @@ namespace ee::input
                                                 return false;
                                             }
                                        }
-                                       else if constexpr (std::is_same_v<decltype(val), int>)
+                                       else if constexpr (std::is_same_v<decltype(val), MouseButton>)
                                        {
                                            switch (key.second)
                                            {
