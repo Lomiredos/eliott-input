@@ -17,19 +17,23 @@ add_library(eliott-input STATIC
     src/InputManager.cpp
 )
 
+if(PROJECT_IS_TOP_LEVEL)
+
 add_executable(tests 
     tests/test-input.cpp
 )
 
-target_include_directories(eliott-input PUBLIC
-    include/
-)
+
 
 target_link_libraries(tests PRIVATE
     eliott-input
     doctest::doctest
 )
+endif()
 
+target_include_directories(eliott-input PUBLIC
+    include/
+)
 
 target_link_libraries(eliott-input PUBLIC
 SDL3::SDL3
