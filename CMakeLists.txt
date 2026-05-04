@@ -5,9 +5,10 @@ if(TARGET eliott-input)
     return()
 endif()
 
+if (PROJECT_IS_TOP_LEVEL)
 set(CMAKE_TOOLCHAIN_FILE "C:/Dev/vcpkg/scripts/buildsystems/vcpkg.cmake")
 set(CMAKE_PREFIX_PATH "C:/Dev/vcpkg/installed/x64-mingw-static")
-
+endif()
 
 set(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES OFF)
 
